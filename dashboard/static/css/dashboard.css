@@ -1,0 +1,235 @@
+:root {
+    color-scheme: dark light;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background-color: #0f172a;
+    color: #e2e8f0;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    min-height: 100vh;
+}
+
+.header {
+    padding: 2rem 5vw 1rem;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    letter-spacing: 0.05em;
+}
+
+.header .subtitle {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #94a3b8;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 2rem;
+    padding: 0 5vw 3rem;
+}
+
+.metrics,
+.chat {
+    display: grid;
+    gap: 2rem;
+}
+
+.card {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.45);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.card h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+}
+
+.metric {
+    background: rgba(30, 41, 59, 0.6);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.metric .label {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    letter-spacing: 0.06em;
+}
+
+.metric .value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #38bdf8;
+}
+
+.timestamp {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.chart-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.chat-window {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 12px;
+    height: 400px;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.chat-message {
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    max-width: 85%;
+    line-height: 1.5;
+}
+
+.chat-message.user {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #6366f1, #818cf8);
+    color: white;
+}
+
+.chat-message.assistant {
+    align-self: flex-start;
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.chat-message time {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+
+.chat-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.chat-form textarea {
+    min-height: 120px;
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    padding: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    background: rgba(15, 23, 42, 0.7);
+    color: inherit;
+}
+
+.chat-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+.chat-actions button {
+    padding: 0.75rem 1.75rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.chat-actions button[type="submit"] {
+    background: linear-gradient(135deg, #22d3ee, #0ea5e9);
+    color: #0f172a;
+    box-shadow: 0 12px 30px rgba(14, 165, 233, 0.35);
+}
+
+.chat-actions button.secondary {
+    background: rgba(148, 163, 184, 0.2);
+    color: inherit;
+}
+
+.chat-actions button:hover {
+    transform: translateY(-1px);
+}
+
+.costs {
+    display: grid;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.costs .label {
+    color: #94a3b8;
+    font-size: 0.85rem;
+}
+
+.cost-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.cost-table th,
+.cost-table td {
+    text-align: left;
+    padding: 0.5rem 0.25rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.cost-table .total-row td {
+    font-weight: 600;
+    color: #38bdf8;
+}
+
+.total-cost {
+    margin-top: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+@media (max-width: 1200px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .metrics-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+
+    .chat-window {
+        height: 320px;
+    }
+}

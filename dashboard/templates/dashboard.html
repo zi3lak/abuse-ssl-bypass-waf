@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel kontrolny serwera AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
+    <script>
+        window.dashboardConfig = {
+            refreshSeconds: {{ refresh_seconds|tojson }},
+            currency: {{ currency|tojson }},
+            promptCost: {{ prompt_cost_per_1k|tojson }},
+            completionCost: {{ completion_cost_per_1k|tojson }}
+        };
+    </script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}" defer></script>
+</head>
+<body>
+    <header class="header">
+        <h1>Panel kontrolny serwera AI</h1>
+        <div class="subtitle">Monitorowanie wydajności, kosztów tokenów i czatu w czasie rzeczywistym</div>
+    </header>
+
+    <main class="container">
+        <section class="metrics">
+            <article class="card">
+                <h2>Aktualne metryki</h2>
+                <div class="metrics-grid" id="metrics-cards">
+                    <div class="metric">
+                        <span class="label">CPU</span>
+                        <span class="value" id="cpu-value">0%</span>
+                    </div>
+                    <div class="metric">
+                        <span class="label">Pamięć</span>
+                        <span class="value" id="memory-value">0%</span>
+                    </div>
+                    <div class="metric">
+                        <span class="label">Dysk</span>
+                        <span class="value" id="disk-value">0%</span>
+                    </div>
+                    <div class="metric">
+                        <span class="label">Sieć (wysyłanie)</span>
+                        <span class="value" id="net-sent-value">0 Mb/s</span>
+                    </div>
+                    <div class="metric">
+                        <span class="label">Sieć (pobieranie)</span>
+                        <span class="value" id="net-recv-value">0 Mb/s</span>
+                    </div>
+                    <div class="metric">
+                        <span class="label">Obciążenie</span>
+                        <span class="value" id="load-value">0 / 0 / 0</span>
+                    </div>
+                </div>
+                <div class="timestamp" id="timestamp">Ostatnia aktualizacja: -</div>
+            </article>
+
+            <article class="card">
+                <h2>Wykresy obciążenia</h2>
+                <div class="chart-grid">
+                    <canvas id="cpu-chart"></canvas>
+                    <canvas id="memory-chart"></canvas>
+                    <canvas id="network-chart"></canvas>
+                </div>
+            </article>
+        </section>
+
+        <section class="chat">
+            <article class="card">
+                <h2>Okno czatu</h2>
+                <div class="chat-window" id="chat-window"></div>
+                <form class="chat-form" id="chat-form">
+                    <textarea id="chat-input" placeholder="Napisz wiadomość do serwera AI..." required></textarea>
+                    <div class="chat-actions">
+                        <button type="submit">Wyślij</button>
+                        <button type="button" id="reset-chat" class="secondary">Wyczyść</button>
+                    </div>
+                </form>
+            </article>
+
+            <article class="card">
+                <h2>Koszty tokenów</h2>
+                <div class="costs">
+                    <div>
+                        <span class="label">Cena promptu (1k tokenów):</span>
+                        <span class="value">{{ prompt_cost_per_1k }} {{ currency }}</span>
+                    </div>
+                    <div>
+                        <span class="label">Cena odpowiedzi (1k tokenów):</span>
+                        <span class="value">{{ completion_cost_per_1k }} {{ currency }}</span>
+                    </div>
+                </div>
+                <table class="cost-table">
+                    <thead>
+                        <tr>
+                            <th>Rodzaj</th>
+                            <th>Tokeny</th>
+                            <th>Koszt ({{ currency }})</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cost-table-body">
+                        <tr>
+                            <td>Prompt</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Odpowiedź</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td>Łącznie</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="total-cost" id="total-cost">Łączny koszt: 0 {{ currency }}</div>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

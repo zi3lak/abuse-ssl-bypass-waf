@@ -61,3 +61,37 @@ or you cannot find keyword or regex when filter by WAF,you can use:
 **When using some SSL/TLS ciphers request the payload URL, If WAF keyword or regex not in html page, there is a way bypassing WAF using Cipher!**
 
 ![](pictures/example-regex-success.png)
+
+## AI server dashboard
+
+The repository also contains a lightweight panel do monitorowania serwera AI i kontroli kosztów tokenów.
+
+### Instalacja
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+### Uruchomienie
+
+```bash
+python -m dashboard
+```
+
+Domyślnie serwer startuje na porcie `8000`. W razie potrzeby możesz ustawić zmienne środowiskowe:
+
+| Zmienna | Opis |
+| --- | --- |
+| `DASHBOARD_HOST` | Adres interfejsu (domyślnie `0.0.0.0`). |
+| `DASHBOARD_PORT` | Port HTTP (domyślnie `8000`). |
+| `DASHBOARD_METRICS_REFRESH_SECONDS` | Odstęp odświeżania metryk (sekundy). |
+| `TOKEN_COST_PROMPT` | Koszt 1000 tokenów promptu. |
+| `TOKEN_COST_COMPLETION` | Koszt 1000 tokenów odpowiedzi. |
+| `TOKEN_COST_CURRENCY` | Waluta wyświetlana w panelu. |
+| `AI_SERVER_ENDPOINT` | Opcjonalny endpoint webhooka odpowiadającego za generowanie odpowiedzi. |
+| `AI_SERVER_API_KEY` | Klucz API przekazywany w nagłówku `Authorization`. |
+| `AI_SERVER_MODEL` | Nazwa modelu przekazywana do endpointu. |
+
+Bez konfiguracji endpointu panel pracuje w trybie demonstracyjnym i zwraca komunikaty echo.
